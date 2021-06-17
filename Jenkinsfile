@@ -22,6 +22,13 @@ pipeline {
                 sh 'mvn -B -DskipTests clean package'
             }
         }
+        
+        stage('Upload to Artifactory') {
+            steps {
+                sh 'echo upload to artifactory'
+            }
+        }
+        
        /* stage('Deliver') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
