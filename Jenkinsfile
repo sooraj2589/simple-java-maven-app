@@ -1,17 +1,13 @@
 pipeline {
     agent {
         docker {
-            image 'maven:3-alpine'
+            image 'maven:3.5.4-alpine'
             args '-v /root/.m2:/root/.m2'
         }
     }
     stages {
-        stage('Build') {
-            steps {
-                sh 'mvn -B -DskipTests clean package'
-            }
-        }
-      /*  stage('Test') {
+
+        stage('Test') {
             steps {
                 sh 'mvn test'
             }
@@ -19,9 +15,14 @@ pipeline {
                 always {
                     junit 'target/surefire-reports/*.xml'
                 }
+            }  
+        }
+         stage('Build') {
+            steps {
+                sh 'mvn -B -DskipTests clean package'
             }
         }
-        stage('Deliver') {
+       /* stage('Deliver') {
             steps {
                 sh './jenkins/scripts/deliver.sh'
             }
